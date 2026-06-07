@@ -1,0 +1,145 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 4rem 2rem;
+  background: #ffffff;
+}
+
+.orb1 {
+  display: none;
+}
+
+.orb2 {
+  display: none;
+}
+
+.waves {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brandIcon {
+  color: var(--purple-vivid);
+  font-size: 1.1rem;
+}
+
+.brandName {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--gray-text);
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--magenta);
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #1a0533;
+}
+
+.gradientText {
+  background: linear-gradient(90deg, var(--magenta), var(--purple-vivid));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.sub {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--gray-text);
+  max-width: 460px;
+}
+
+.sub strong {
+  color: #1a0533;
+  font-weight: 600;
+}
+
+.proof {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.proofItem {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--gray-text);
+  font-weight: 400;
+}
+
+.proofDivider {
+  width: 1px;
+  height: 14px;
+  background: rgba(123,47,255,0.2);
+}
+
+.right {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .hero {
+    padding: 3rem 1.25rem;
+    min-height: auto;
+  }
+
+  .right {
+    width: 100%;
+  }
+}

@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Outfit:wght@300;400;500;600&display=swap');
+
+:root {
+  --purple-vivid: #7b2fff;
+  --magenta: #e0198c;
+  --cyan: #00aacc;
+  --purple-soft: #f0e8ff;
+  --magenta-soft: #ffe8f4;
+  --gray-text: #4a4060;
+  --gray-light: #f7f4ff;
+  --white: #ffffff;
+  --border: rgba(123,47,255,0.15);
+--font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--white);
+  color: #1a0533;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--magenta);
+  color: var(--white);
+}
