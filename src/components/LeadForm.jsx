@@ -98,7 +98,6 @@ export default function LeadForm({ inline = false }) {
                 <div className={styles.badges}>
                   <span>⏱ 2 minutos</span>
                   <span>🎁 Gratis</span>
-                  <span>🎯 Personalizado</span>
                 </div>
               </div>
             </>
