@@ -160,6 +160,7 @@ const WELCOME_MESSAGE = {
   role: "model",
   content:
     `¡Hola! 👋 Soy **${BOT_NAME}**, tu asistente de **Atrévete a Hablar**. Puedo contarte sobre el test gratuito, la confianza social o cómo funciona la propuesta. ¿Por dónde empezamos?`,
+  showOptions: true,
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -186,6 +187,17 @@ function findFaqAnswer(text) {
   }
 
   return null;
+}
+
+function isMenuRequest(text) {
+  const lower = normalizeText(text);
+
+  return (
+    lower.includes("menu") ||
+    lower.includes("inicio") ||
+    lower.includes("opciones") ||
+    lower.includes("ayuda")
+  );
 }
 
 function escapeHtml(text) {
@@ -235,7 +247,11 @@ export default function ChatBot() {
   }, [open]);
 
   function getFallbackAnswer() {
-    return "Por ahora puedo ayudarte con información básica sobre Atrévete a Hablar, el test gratuito, privacidad, confianza social y contacto. Puedes elegir una de las opciones rápidas para continuar.";
+    return {
+      content:
+        "Por ahora puedo ayudarte con información básica sobre Atrévete a Hablar, el test gratuito, privacidad, confianza social y contacto. Puedes elegir una de las opciones rápidas para continuar.",
+      showOptions: true,
+    };
   }
 
   function sendMessage(text) {
@@ -248,6 +264,7 @@ export default function ChatBot() {
       {
         role: "user",
         content: userText,
+        showOptions: false,
       },
     ]);
 
@@ -256,16 +273,32 @@ export default function ChatBot() {
 
     setTimeout(() => {
       const faqAnswer = findFaqAnswer(userText);
-      const botAnswer = faqAnswer || getFallbackAnswer();
+      const fallbackAnswer = getFallbackAnswer();
+      const shouldShowMenu = isMenuRequest(userText);
 
-      setMessages((prev) => [
-        ...prev,
-        {
+      let botMessage;
+
+      if (shouldShowMenu) {
+        botMessage = {
           role: "model",
-          content: botAnswer,
-        },
-      ]);
+          content: "Claro 😊 Estas son las opciones rápidas que puedo mostrarte:",
+          showOptions: true,
+        };
+      } else if (faqAnswer) {
+        botMessage = {
+          role: "model",
+          content: faqAnswer,
+          showOptions: false,
+        };
+      } else {
+        botMessage = {
+          role: "model",
+          content: fallbackAnswer.content,
+          showOptions: fallbackAnswer.showOptions,
+        };
+      }
 
+      setMessages((prev) => [...prev, botMessage]);
       setLoading(false);
     }, 450);
   }
@@ -277,7 +310,11 @@ export default function ChatBot() {
     }
   }
 
-  const showSuggestions = messages.length === 1;
+  const lastMessage = messages[messages.length - 1];
+
+  const showSuggestions =
+    messages.length === 1 ||
+    (lastMessage?.role === "model" && lastMessage?.showOptions);
 
   return (
     <>
