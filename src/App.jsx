@@ -2,6 +2,8 @@ import './index.css'
 import Hero from './components/Hero'
 import Benefits from './components/Benefits'
 import Footer from './components/Footer'
+import ChatBot from './components/ChatBot'
+
 
 export default function App() {
   return (
@@ -9,6 +11,8 @@ export default function App() {
       <Hero />
       <Benefits />
       <Footer />
+      <ChatBot />
     </main>
+    
   )
 }
